@@ -1,0 +1,22 @@
+<div class="search-form">
+    <form [formGroup]="findBookForm" (ngSubmit)="onSubmit(findBookForm.value,findBookForm.valid)" class="form d-flex">
+        <div class="form-element">
+        <mat-form-field class="form-half-width" appearance="fill">
+            <mat-label>Search By Book Title</mat-label>
+            <input matInput placeholder="Enter Book Title" formControlName="name">
+        </mat-form-field>
+    </div>
+        <div class="form-element">
+        <mat-form-field class="form-half-width" appearance="fill">
+            <mat-label>Search By Book ID</mat-label>
+            <mat-select formControlName="id">
+                <mat-option *ngFor="let bookId of BookIDs;" [value]="bookId">{{ bookId }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+        <div class="form-element full-width">
+            <button class="button" type="submit" mat-raised-button color="primary">Search Book</button>
+            <button class="button" mat-raised-button color="primary">Reset</button>
+        </div>
+    </form>
+</div>

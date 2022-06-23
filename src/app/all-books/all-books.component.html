@@ -1,0 +1,103 @@
+<div class ="book-list">
+
+  <app-search-books></app-search-books>
+
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 allbooks">
+
+   
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="Sr">
+      <th mat-header-cell *matHeaderCellDef> Sr </th>
+      <td mat-cell *matCellDef="let element"> {{element.Sr}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="ID">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Book Title">
+      <th mat-header-cell *matHeaderCellDef> Book Title </th>
+      <td mat-cell *matCellDef="let element"> {{element['Book Title']}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Book Authours">
+      <th mat-header-cell *matHeaderCellDef> Book Authours </th>
+      <td mat-cell *matCellDef="let element"> {{element['Book Authours']}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Book Publisher">
+        <th mat-header-cell *matHeaderCellDef> Book Publisher </th>
+        <td mat-cell *matCellDef="let element"> {{element['Book Publisher']}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Year Of Publication">
+        <th mat-header-cell *matHeaderCellDef> Year Of Publication </th>
+        <td mat-cell *matCellDef="let element"> {{element['Year Of Publication']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Book Quantity">
+        <th mat-header-cell *matHeaderCellDef> Book Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element['Book Quantity']}} 
+            <span> 
+                <button mat-button (click)="openDialog()"><mat-icon>edit</mat-icon>Edit</button>
+              
+            </span>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Summary">
+        <th mat-header-cell *matHeaderCellDef> Summary </th>
+        <td mat-cell *matCellDef="let element"> {{element['Summary']}} 
+          <span> 
+            <button mat-button (click)="getSummary(element['Summary'])"><mat-icon>edit</mat-icon>Read summary</button>
+          
+        </span>
+        </td>
+
+      </ng-container>
+      
+      <ng-container matColumnDef="Book Format">
+        <th mat-header-cell *matHeaderCellDef> Book Format </th>
+        <td mat-cell *matCellDef="let element"> {{element['Book Format']}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit</th>
+        <td mat-cell *matCellDef="let element"> {{element['edit']}} 
+          <span> 
+          
+            <button mat-button [routerLink]="'edit/'+element['edit']"><mat-icon>edit</mat-icon>Edit</button>
+          
+        </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let element"> {{element['delete']}}
+          <span> 
+            <button mat-button (click)="deleteBookDialog(element['delete'])"><mat-icon>delete</mat-icon>Delete</button>
+          
+        </span> </td>
+      </ng-container>
+
+
+
+      
+      
+
+      
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+  

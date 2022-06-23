@@ -1,0 +1,25 @@
+<mat-card class="login-page" class="mat-elevation-z8">
+    <mat-card-title>Login </mat-card-title>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value,formGroup.valid)" class="form">
+    <mat-form-field class="form-full-width" appearance="fill">
+        <mat-label>username</mat-label>
+        <input matInput placeholder="Please Enter username" formControlName="username">
+        <mat-error *ngIf="!formGroup.controls['username'].valid && formGroup.controls['username'].touched">
+           username is required
+          </mat-error>
+     </mat-form-field>
+     <mat-form-field class="form-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Please Enter Password" formControlName="password">
+        <mat-error *ngIf="!formGroup.controls['password'].valid && formGroup.controls['username'].touched">
+           password is required
+          </mat-error>
+     </mat-form-field>
+     <div class="form-element">
+        <button class="button"  type="submit" mat-raised-button  color="primary" [disabled]="!formGroup.valid">Login</button>
+        <button  class ="button" mat-raised-button  color="primary" (click)="resetForm()">Reset</button>     
+ </div>
+</form>
+    
+<mat-card-content>
+

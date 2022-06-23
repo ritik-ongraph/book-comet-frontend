@@ -1,0 +1,77 @@
+<mat-card class="add-books">
+    <mat-card-title>Add New Book </mat-card-title>
+
+    <form  [formGroup]="addBookForm" (ngSubmit)="onSubmit(addBookForm.value,addBookForm.valid)" class="form">
+    <mat-form-field class="form-full-width" appearance="fill">
+        <mat-label>Book Title</mat-label>
+        <input matInput placeholder="Enter Book Title" formControlName="name" >
+        
+     </mat-form-field>
+
+     <div formArrayName="authors"  [ngClass]="{authors:authors.controls.length>1}">
+        <ng-container *ngFor="let author of authors.controls;let i = index">
+        <mat-form-field class="form-half-width" appearance="fill">
+            <mat-label>Book Authors</mat-label>
+            <input matInput placeholder="Enter Book Authors {{i+1}}" [formControlName]="i" >
+         </mat-form-field>
+         <button  class="small-button"  (click)="addAuthor()" mat-raised-button  color="primary" ><mat-icon>add</mat-icon>Add Author</button>
+
+         <button  *ngIf="authors.controls.length>1" class="small-button"  (click)="removeAuthor(i)" mat-raised-button  color="primary" ><mat-icon>delete</mat-icon>Remove Author</button>
+
+        </ng-container>
+     </div>
+     
+     
+
+     
+    
+
+     <mat-form-field class="form-full-width" appearance="fill">
+        <mat-label>Book publisher</mat-label>
+        <input matInput placeholder="Enter Book publisher" formControlName="publisher" required >
+      
+     </mat-form-field>
+     <mat-form-field class="form-full-width" appearance="fill">
+      <mat-label>year of Publication</mat-label>
+        <mat-select formControlName="yop"> 
+            <mat-option *ngFor="let year of yearsArr;" [value]="year">{{ year }}</mat-option>
+         </mat-select>
+       
+
+     </mat-form-field>
+
+     <mat-form-field class=" form-half-width numbers" >
+      <mat-label>Qunatity</mat-label>
+        <input matInput type="number" min="1" formControlName="qty"
+        OnlyNumber="true">
+    </mat-form-field>
+      <div class="d-flex column">
+         <label>Select Book Format</label>
+         <mat-radio-group aria-label="Select Book Format" formControlName="format">
+            <mat-radio-button *ngFor="let type of formats; let i = index" [value]="type" [checked]="i === 0">{{type}}</mat-radio-button>
+            </mat-radio-group>
+      
+      </div>
+      
+
+     <mat-form-field class="form-full-width" appearance="fill">
+        <mat-label>Write a brief summary</mat-label>
+        <textarea matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="20"
+        cdkAutosizeMaxRows="50"
+        formControlName="summary"></textarea>
+     
+     </mat-form-field>
+
+
+
+     <div class="form-element">
+        <button class="button"  type="submit" mat-raised-button  color="primary" >Add Book</button>
+        <button  class ="button"  *ngIf="!this.editId" mat-raised-button  color="primary" >Reset</button>     
+ </div>
+</form>
+    
+<mat-card-content>
+
