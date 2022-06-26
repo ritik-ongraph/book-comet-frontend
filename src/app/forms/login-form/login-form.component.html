@@ -10,7 +10,7 @@
      </mat-form-field>
      <mat-form-field class="form-full-width" appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Please Enter Password" formControlName="password">
+        <input type="password" matInput placeholder="Please Enter Password" formControlName="password">
         <mat-error *ngIf="!formGroup.controls['password'].valid && formGroup.controls['username'].touched">
            password is required
           </mat-error>

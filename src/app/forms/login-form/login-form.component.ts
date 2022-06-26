@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'app-form',
   templateUrl: './login-form.component.html',
@@ -7,7 +9,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class FormComponent implements OnInit {
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,private router: Router,private authService:AuthenticationService) {
 
    }
 
@@ -33,6 +35,15 @@ export class FormComponent implements OnInit {
      
 
     }
+
+    this.authService.loginUser(data).subscribe((result)=>{
+       console.log("result",result);
+       localStorage.setItem('x-access-token','admin');
+       this.router.navigate(['dashboard']);
+       
+    },(error)=>{
+       console.log("error",error);
+    })
     this.resetForm();
   }
 

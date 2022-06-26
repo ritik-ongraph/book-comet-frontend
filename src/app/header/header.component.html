@@ -1,6 +1,11 @@
 <mat-toolbar color="primary" class="navbar">
-<span> <a class="nav_link"routerLink="/">Book Comet</a></span>
-<span><a class="nav_link"routerLink="/dashboard">List All Books</a></span>
-<span><a class="nav_link" routerLink="dashboard/add">Add Books</a></span>
-<span><mat-icon>logout</mat-icon> Logout</span>
+<span > <a class="nav_link"routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+    >Book Comet</a></span>
+<span><a class="nav_link"routerLink="dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+    >List All Books</a></span>
+<span><a class="nav_link" routerLink="dashboard/add" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+    >Add Books</a></span>
+<span *ngIf="!userLoggedIn"><mat-icon>login</mat-icon> LogIn</span>
+
+<span *ngIf="userLoggedIn" (click)="signoutUser()"><mat-icon>logout</mat-icon> Logout</span>
 </mat-toolbar>

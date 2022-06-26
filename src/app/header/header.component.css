@@ -20,3 +20,7 @@ span {
       font-size: 14px;
     }    
 }
+
+.nav_link.active-link{
+color :orange
+}
