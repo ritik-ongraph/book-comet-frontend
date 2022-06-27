@@ -3,3 +3,7 @@
     padding: 10px;
 }
 
+mat-card.add-books{
+    margin: 25px auto;
+    width:80%;
+}

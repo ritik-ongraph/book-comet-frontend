@@ -1,5 +1,3 @@
-<p>confirm-modal works!</p>
-
 <mat-dialog-content>
 	<p>
 		{{message}}
@@ -7,6 +5,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-	<button mat-raised-button color="primary" (click)="onclose()" tabindex="1">close</button>
+	<button mat-raised-button color="primary" (click)="deleteBook()" tabindex="1">confirm</button>
+
+	<button mat-raised-button color="primary" (click)="close()" tabindex="1">cancel</button>
 
 </mat-dialog-actions>

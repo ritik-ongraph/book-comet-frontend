@@ -8,7 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./login-form.component.css']
 })
 export class FormComponent implements OnInit {
-  formGroup: FormGroup;
+ public formGroup: FormGroup;
   constructor(private formBuilder: FormBuilder,private router: Router,private authService:AuthenticationService) {
 
    }

@@ -1,6 +1,6 @@
-<mat-card class="add-books">
+<mat-card class="add-books" *ngIf="!dataSaved" >
     <mat-card-title>Add New Book </mat-card-title>
-
+    <mat-card-content>
     <form  [formGroup]="addBookForm" (ngSubmit)="onSubmit(addBookForm.value,addBookForm.valid)" class="form">
     <mat-form-field class="form-full-width" appearance="fill">
         <mat-label>Book Title</mat-label>
@@ -72,6 +72,17 @@
         <button  class ="button"  *ngIf="!this.editId" mat-raised-button  color="primary" >Reset</button>     
  </div>
 </form>
-    
-<mat-card-content>
+    </mat-card-content>
+  
+</mat-card>
+
+<mat-card *ngIf="dataSaved">
+   <mat-card-title>
+      Data saved successfully
+
+   </mat-card-title>
+   <mat-card-content>
+      <a routerLink="/dashboard">Back to Dashboard</a>
+   </mat-card-content>
+</mat-card>
 

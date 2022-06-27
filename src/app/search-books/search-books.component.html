@@ -1,20 +1,49 @@
 <div class="search-form">
-    <form [formGroup]="findBookForm" (ngSubmit)="onSubmit(findBookForm.value,findBookForm.valid)" class="form d-flex">
-        <div class="form-element">
-        <mat-form-field class="form-half-width" appearance="fill">
-            <mat-label>Search By Book Title</mat-label>
-            <input matInput placeholder="Enter Book Title" formControlName="name">
-        </mat-form-field>
-    </div>
-        <div class="form-element">
-        <mat-form-field class="form-half-width" appearance="fill">
-            <mat-label>Search By Book ID</mat-label>
-            <mat-select formControlName="id">
-                <mat-option *ngFor="let bookId of BookIDs;" [value]="bookId">{{ bookId }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-        <div class="form-element full-width">
+    <form [formGroup]="findBookForm" (ngSubmit)="onSubmit(findBookForm.value,findBookForm.valid)" class="searchform d-flex">
+        <div class="search-form-input-fields">
+            <div class="form-element">
+                <mat-form-field class="form-full-width" appearance="fill">
+                    <mat-label>Search By Book ID</mat-label>
+                    <mat-select formControlName="id">
+                        <mat-option *ngFor="let bookId of bookIDs;" [value]="bookId">{{ bookId }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            
+            <div class="form-element">
+                <mat-form-field class="form-full-width" appearance="fill">
+                    <mat-label>Search By Authors</mat-label>
+                    <mat-select formControlName="authors">
+                        <mat-option *ngFor="let author of bookAuthors;" [value]="author">{{ author }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="form-element">
+                <mat-form-field class="form-full-width" appearance="fill">
+                    <mat-label>Search By Publisher</mat-label>
+                    <mat-select formControlName="publisher">
+                        <mat-option *ngFor="let publisher of bookPublisher;" [value]="publisher">{{ publisher }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <div class="form-element">
+                <mat-form-field class="form-full-width" appearance="fill">
+                    <mat-label>Search By Book Title</mat-label>
+                    <input matInput placeholder="Enter Book Title" formControlName="name" [matAutocomplete]="selectName" (ngModelChange)=onSelectionChanged($event) >
+                    <mat-autocomplete #selectName="matAutocomplete">
+                        <mat-option *ngFor="let title of filteredNameOptions" [value]="title">
+                            {{ title}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                </mat-form-field>
+            </div>
+
+             </div>
+        
+        <div class="form-element button-group full-width">
             <button class="button" type="submit" mat-raised-button color="primary">Search Book</button>
             <button class="button" mat-raised-button color="primary">Reset</button>
         </div>

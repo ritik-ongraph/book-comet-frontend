@@ -1,33 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BookInventoryComponent } from '../dialog/book-inventory/book-inventory.component';
 import { ConfirmModalComponent } from '../dialog/confirm-modal/confirm-modal.component';
 import { SummaryComponent } from '../dialog/summary/summary.component';
-
-export interface PeriodicElement {
-  'Sr': number;
-  'ID': number;
-  'Book Title': string;
-  'Book Authours': Array<string>;
-  'Book Publisher':string;
-  'Year Of Publication':string;
-  'Book Quantity':string;
-  'Book Format':string;
-  'Summary':string;
-  'edit':number;
-  'delete':number;
+import { IBooks } from '../modals/books';
+import { SearchBooksComponent } from '../search-books/search-books.component';
+import { BookService } from '../services/book.service';
 
 
-
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {'Sr': 1, 'ID': 1, 'Book Title': 'lorem ipsum dolar arrenfosdfl', 'Book Authours': ['Hklkdkfklklsfklksdfdsfsdfdf','tdsgfjkdhfjfhsdjflddhfjdlfdk'],'Book Publisher':"abchgdlhkfdsigvdsilvchildsfchdsbicgdsbhkcidslcdscdsfdsfdsfdsfdsfdsffsd",'Year Of Publication':'2019','Book Quantity':'123','Book Format':'134','Summary':'12323244','edit':1,'delete':1},
-  {'Sr': 1, 'ID': 1, 'Book Title': 'ljbdjbfl;dffkhglfdjgjfdlf;djgfdgdfgfdhfdh', 'Book Authours': ['Hklkdkfklklsfklksdfdsfsdfdf','tdsgfjkdhfjfhsdjflddhfjdlfdk'],'Book Publisher':"abchgdlhkfdsigvdsilvchildsfchdsbicgdsbhkcidslcdscdsfdsfdsfdsfdsfdsffsd",'Year Of Publication':'2019','Book Quantity':'123','Book Format':'134','Summary':'12323244','edit':1,'delete':1},
-  {'Sr': 1, 'ID': 1, 'Book Title': 'ljbdjbfl;dffkhglfdjgjfdlf;djgfdgdfgfdhfdh', 'Book Authours': ['Hklkdkfklklsfklksdfdsfsdfdf','tdsgfjkdhfjfhsdjflddhfjdlfdk'],'Book Publisher':"abchgdlhkfdsigvdsilvchildsfchdsbicgdsbhkcidslcdscdsfdsfdsfdsfdsfdsffsd",'Year Of Publication':'2019','Book Quantity':'123','Book Format':'134','Summary':'12323244','edit':1,'delete':1},
-  {'Sr': 1, 'ID': 1, 'Book Title': 'ljbdjbfl;dffkhglfdjgjfdlf;djgfdgdfgfdhfdh', 'Book Authours': ['Hklkdkfklklsfklksdfdsfsdfdf','tdsgfjkdhfjfhsdjflddhfjdlfdk'],'Book Publisher':"abchgdlhkfdsigvdsilvchildsfchdsbicgdsbhkcidslcdscdsfdsfdsfdsfdsfdsffsd",'Year Of Publication':'2019','Book Quantity':'123','Book Format':'134','Summary':'12323244','edit':1,'delete':1},
-  {'Sr': 1, 'ID': 1, 'Book Title': 'ljbdjbfl;dffkhglfdjgjfdlf;djgfdgdfgfdhfdh', 'Book Authours': ['Hklkdkfklklsfklksdfdsfsdfdf','tdsgfjkdhfjfhsdjflddhfjdlfdk'],'Book Publisher':"abchgdlhkfdsigvdsilvchildsfchdsbicgdsbhkcidslcdscdsfdsfdsfdsfdsfdsffsd",'Year Of Publication':'2019','Book Quantity':'123','Book Format':'134','Summary':'12323244','edit':1,'delete':1},
-  ];
+const ELEMENT_DATA: IBooks[] = [];
 
 
 @Component({
@@ -39,25 +20,48 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 export class AllBooksComponent implements OnInit {
-  displayedColumns: string[] = ['Sr', 'ID', 'Book Title', 'Book Authours','Book Publisher','Year Of Publication', 'Book Quantity' , 'Book Format','Summary', 'edit','delete'];
-  public dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'name','authors', 'publisher', 'yop','summary','qty','format','edit','delete'];
+  public dataSource :any = ELEMENT_DATA;
+  @ViewChild(SearchBooksComponent) SearchBooksComponent;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private bookService:BookService,private ref: ChangeDetectorRef,private dialog: MatDialog) {
 
    }
 
   ngOnInit(): void {
+    this.getBookDetails();
+    this.updateBooks();
   }
+
+
   
-  openDialog(){
+
   
+getBookDetails(){
+    console.log("get Book Details");
+  this.bookService.getBookDetails().subscribe((response:any)=>{
+    console.log('result',response.data);
+    this.dataSource = response.data ;
+    this.bookService.setBookDetails(this.dataSource);
+  },(error)=>{
+    console.log("error",error);
+  })
+  }
+
+  openDialog(id:string,qty:number,){
+     console.log(id,qty)
       const dialogRef = this.dialog.open(BookInventoryComponent, {
         data: {
-          message: 'Are you sure want to delete?',
+          message: `Are you sure you want to Edit Book Quantity ?`,
+          qty:qty,
+          id:id,
           buttonText: {
             ok: 'Save',
             cancel: 'No',
           },
+          height: '80%',
+        width: '60%',
+      
         },
       });
   
@@ -67,12 +71,13 @@ export class AllBooksComponent implements OnInit {
     
   }
 
-  getSummary(summary:string){
-    console.log(summary);
+  getSummary(summary:string,id:string){
+    console.log(summary,id);
 
     const dialogRef = this.dialog.open(SummaryComponent, {
       data: {
         message: summary,
+        id:id
         
       }, 
       height: '40%',
@@ -100,8 +105,19 @@ export class AllBooksComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      this.SearchBooksComponent.getAllBookDetails();
+
       console.log(confirmed);
     });
   }
 
+
+  updateBooks(){
+    console.log("updateBooks")
+    this.bookService.bookDetails.subscribe((BooksData)=>{
+      this.dataSource = BooksData ;
+
+      console.log("new data", BooksData)
+    })
+  }
 }

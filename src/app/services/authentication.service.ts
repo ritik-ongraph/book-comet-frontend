@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private loginUrl = environment.baseUrl+'/api/v1/login'
+  private loginUrl = environment.baseUrl+'/api/v1/user/login'
   constructor(private http:HttpClient, private router : Router) { 
 
   }

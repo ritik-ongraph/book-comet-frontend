@@ -6,11 +6,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS} from '@angular/material/radio';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
-const MaterialComponents = [MatInputModule,MatCardModule,MatToolbarModule,MatButtonModule,MatIconModule,MatSelectModule,TextFieldModule,MatRadioModule,MatTableModule,MatDialogModule]
+const MaterialComponents = [MatInputModule,MatCardModule,MatToolbarModule,MatButtonModule,MatIconModule,MatSelectModule,MatAutocompleteModule,TextFieldModule,MatRadioModule,MatTableModule,MatDialogModule]
 
 @NgModule({
   declarations: [],

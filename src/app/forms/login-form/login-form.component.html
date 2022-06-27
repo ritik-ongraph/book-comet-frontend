@@ -1,5 +1,6 @@
-<mat-card class="login-page" class="mat-elevation-z8">
+<mat-card class="login-page mat-elevation-z8">
     <mat-card-title>Login </mat-card-title>
+    <mat-card-content>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value,formGroup.valid)" class="form">
     <mat-form-field class="form-full-width" appearance="fill">
         <mat-label>username</mat-label>
@@ -20,6 +21,6 @@
         <button  class ="button" mat-raised-button  color="primary" (click)="resetForm()">Reset</button>     
  </div>
 </form>
-    
-<mat-card-content>
+</mat-card-content>
+</mat-card>
 

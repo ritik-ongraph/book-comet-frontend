@@ -10,81 +10,81 @@
    
   
     <!-- Position Column -->
-    <ng-container matColumnDef="Sr">
-      <th mat-header-cell *matHeaderCellDef> Sr </th>
-      <td mat-cell *matCellDef="let element"> {{element.Sr}} </td>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
   
     <!-- Name Column -->
-    <ng-container matColumnDef="ID">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Book Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
   
     <!-- Weight Column -->
-    <ng-container matColumnDef="Book Title">
-      <th mat-header-cell *matHeaderCellDef> Book Title </th>
-      <td mat-cell *matCellDef="let element"> {{element['Book Title']}} </td>
+    <ng-container matColumnDef="authors">
+      <th mat-header-cell *matHeaderCellDef> authors </th>
+      <td mat-cell *matCellDef="let element"> 
+        {{element.authors}}
+       </td>
     </ng-container>
   
     <!-- Symbol Column -->
-    <ng-container matColumnDef="Book Authours">
-      <th mat-header-cell *matHeaderCellDef> Book Authours </th>
-      <td mat-cell *matCellDef="let element"> {{element['Book Authours']}} </td>
+    <ng-container matColumnDef="publisher">
+      <th mat-header-cell *matHeaderCellDef> Book publisher </th>
+      <td mat-cell *matCellDef="let element"> {{element.publisher}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Book Publisher">
-        <th mat-header-cell *matHeaderCellDef> Book Publisher </th>
-        <td mat-cell *matCellDef="let element"> {{element['Book Publisher']}} </td>
+    <ng-container matColumnDef="yop">
+        <th mat-header-cell *matHeaderCellDef> Year Of Publication </th>
+        <td mat-cell *matCellDef="let element"> {{element.yop}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="Year Of Publication">
-        <th mat-header-cell *matHeaderCellDef> Year Of Publication </th>
-        <td mat-cell *matCellDef="let element"> {{element['Year Of Publication']}} </td>
+
+      <ng-container matColumnDef="format">
+        <th mat-header-cell *matHeaderCellDef> Book Format </th>
+        <td mat-cell *matCellDef="let element"> {{element.format}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="Book Quantity">
+
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef> Summary </th>
+        <td mat-cell *matCellDef="let element"> 
+          
+      <button mat-button (click)="getSummary(element.summary,element.id)"><mat-icon>edit</mat-icon>Read summary</button>
+          
+        
+        </td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="qty">
         <th mat-header-cell *matHeaderCellDef> Book Quantity </th>
-        <td mat-cell *matCellDef="let element"> {{element['Book Quantity']}} 
-            <span> 
-                <button mat-button (click)="openDialog()"><mat-icon>edit</mat-icon>Edit</button>
+        <td mat-cell *matCellDef="let element"> {{element.qty}} 
+            <span class="btn"> 
+                <button mat-button (click)="openDialog(element.id,element.qty)"><mat-icon>edit</mat-icon>Edit</button>
               
             </span>
         </td>
       </ng-container>
 
 
-      <ng-container matColumnDef="Summary">
-        <th mat-header-cell *matHeaderCellDef> Summary </th>
-        <td mat-cell *matCellDef="let element"> {{element['Summary']}} 
-          <span> 
-            <button mat-button (click)="getSummary(element['Summary'])"><mat-icon>edit</mat-icon>Read summary</button>
-          
-        </span>
-        </td>
-
-      </ng-container>
       
-      <ng-container matColumnDef="Book Format">
-        <th mat-header-cell *matHeaderCellDef> Book Format </th>
-        <td mat-cell *matCellDef="let element"> {{element['Book Format']}} </td>
-      </ng-container>
 
       <ng-container matColumnDef="edit">
         <th mat-header-cell *matHeaderCellDef> Edit</th>
-        <td mat-cell *matCellDef="let element"> {{element['edit']}} 
+        <td mat-cell *matCellDef="let element">
           <span> 
           
-            <button mat-button [routerLink]="'edit/'+element['edit']"><mat-icon>edit</mat-icon>Edit</button>
+            <button mat-button [routerLink]="'edit/'+element['id']"><mat-icon>edit</mat-icon>Edit</button>
           
         </span>
         </td>
       </ng-container>
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef> Delete</th>
-        <td mat-cell *matCellDef="let element"> {{element['delete']}}
-          <span> 
-            <button mat-button (click)="deleteBookDialog(element['delete'])"><mat-icon>delete</mat-icon>Delete</button>
+        <td mat-cell *matCellDef="let element"><span> 
+            <button mat-button (click)="deleteBookDialog(element['id'])"><mat-icon>delete</mat-icon>Delete</button>
           
         </span> </td>
       </ng-container>
