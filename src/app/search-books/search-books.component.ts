@@ -54,7 +54,7 @@ export class SearchBooksComponent implements OnInit {
 
   getAllBookDetails(){
     this.bookService.getBookDetails().subscribe((result:any)=>{
-         console.log("getAllBookDetails",result);
+         
          let bookDetails = result.data;
          this.bookService.setBookDetails(result.data)
 
@@ -106,12 +106,12 @@ export class SearchBooksComponent implements OnInit {
     return
    }
 
-console.log(searchParams);
+
 
    this.bookService.getBooksBySearch(searchParams).subscribe(
     (res:any)=>{
       this.bookService.setBookDetails(res.data)
-      console.log("data",res)
+    
   },(error)=>{
      console.log("error",error);
    });

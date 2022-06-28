@@ -23,7 +23,7 @@ export class BookInventoryComponent implements OnInit {
   private dialogRef: MatDialogRef<BookInventoryComponent>) { }
   public bookqty:number;
   ngOnInit(): void {
-    console.log(this.data);
+    
     this.message = this.data.message;
     this.bookId = this.data.id;
     this.bookqty = this.data.qty || 0;

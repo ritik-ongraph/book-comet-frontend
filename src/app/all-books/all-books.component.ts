@@ -94,7 +94,7 @@ export class AllBooksComponent implements OnInit {
 
 
   updateBooks(){
-    console.log("update Books");
+    
     this.bookService.bookDetails.subscribe((BooksData)=>{
       this.dataSource = BooksData ;
     })
