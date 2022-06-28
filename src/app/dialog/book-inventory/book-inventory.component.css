@@ -1,15 +1,22 @@
 mat-icon {
     cursor: pointer;
     font-size: 40px;
+    text-align: center;
     height: 100%;
     width: 100%;
+
 }
 
 .form {
     width: 80%;
 }
-
+.buttons-group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    }
 .form-element {
     display: flex;
 
 }
+
