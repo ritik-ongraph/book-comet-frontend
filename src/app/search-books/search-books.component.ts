@@ -27,8 +27,7 @@ export class SearchBooksComponent implements OnInit {
     this.initalilizedForm();
     this.getAllBookDetails();
     this.findBookForm.get('name').valueChanges.subscribe((name)=>{
-      console.log("name",name);
-      if(name){
+     if(name){
         this.filteredNameOptions = this.getFilterName(name);
 
       }
@@ -70,7 +69,7 @@ export class SearchBooksComponent implements OnInit {
   }
 
   initializeSearchFilter(bookDetails:IBooks[]){
-    console.log('search filter initialize');
+    
     this.bookIDs = _.map(bookDetails,'id');
     this.bookAuthors = _.uniq(_.flatten(_.map(bookDetails,'authors')));
     this.bookPublisher = _.uniq(_.map(bookDetails,'publisher'));
@@ -81,7 +80,7 @@ export class SearchBooksComponent implements OnInit {
   }
 
   getFilterName(nameTerm:string){
-    console.log("nameTerm",nameTerm);
+    
     if(!nameTerm){
      return [];
     }
@@ -90,20 +89,20 @@ export class SearchBooksComponent implements OnInit {
    }
 
   onSelectionChanged(event){
-    console.log("selection value",event);
+    //console.log("selection value",event);
     
 
   }
 
   onSubmit(findBookForm:any,isValid:boolean){
-    console.log(findBookForm);
-    console.log(isValid);
+    
+   
     if(!isValid){
        return
     }
     // Remove undefined and null fields
     let searchParams = _.pickBy(findBookForm, _.identity);
-   if( _.isEmpty( searchParams )){
+    if( _.isEmpty( searchParams )){
     return
    }
 

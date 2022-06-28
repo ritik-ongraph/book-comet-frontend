@@ -66,7 +66,7 @@ export class BookInventoryComponent implements OnInit {
     this.bookInventoryService.updateBookQuantityByBookId(this.bookId,this.bookqty).subscribe((result)=>{
       this.onConfirmClick();
     },(error)=>{
-      this.snackBar.open('some error occor Please try again ',"ok");
+      this.snackBar.open('some error occur Please try again ',"ok");
       })
   }
 
@@ -75,7 +75,7 @@ export class BookInventoryComponent implements OnInit {
       let  data = response.data;
       this.bookService.setBookDetails(data);
     },(error)=>{
-      this.snackBar.open('some error occor Please try again ',"ok");
+      this.snackBar.open('some error occur Please try again ',"ok");
     })
    
     this.dialogRef.close(true);

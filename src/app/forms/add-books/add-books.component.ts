@@ -111,7 +111,7 @@ export class AddBooksComponent implements OnInit {
     }
     )
   }
-  updateBooks(bookId, BookDetails) {
+  updateBooks(bookId:string, BookDetails:any) {
    this.bookService.updateBooks(bookId, BookDetails).subscribe((response) => {
       this.resetForm();
     }

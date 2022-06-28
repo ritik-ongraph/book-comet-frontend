@@ -12,7 +12,6 @@ export class SummaryComponent implements OnInit {
   private dialogRef: MatDialogRef<SummaryComponent>) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.message = this.data.message;
   }
 
