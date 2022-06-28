@@ -28,7 +28,10 @@ export class SearchBooksComponent implements OnInit {
     this.getAllBookDetails();
     this.findBookForm.get('name').valueChanges.subscribe((name)=>{
       console.log("name",name);
-      this.filteredNameOptions = this.getFilterName(name);
+      if(name){
+        this.filteredNameOptions = this.getFilterName(name);
+
+      }
     })
 
 
@@ -52,9 +55,10 @@ export class SearchBooksComponent implements OnInit {
 
   getAllBookDetails(){
     this.bookService.getBookDetails().subscribe((result:any)=>{
-         console.log("data",result);
+         console.log("getAllBookDetails",result);
          let bookDetails = result.data;
-         
+         this.bookService.setBookDetails(result.data)
+
          this.initializeSearchFilter(bookDetails);
 
     },(error)=>{
@@ -78,7 +82,9 @@ export class SearchBooksComponent implements OnInit {
 
   getFilterName(nameTerm:string){
     console.log("nameTerm",nameTerm);
-
+    if(!nameTerm){
+     return [];
+    }
     let filteredTerm = nameTerm.toLowerCase();
     return this.bookName.filter((options)=>options.toLowerCase().includes(filteredTerm));
    }
@@ -111,6 +117,11 @@ console.log(searchParams);
      console.log("error",error);
    });
 
+  }
+
+  resetFilter(){
+    this.findBookForm.reset();
+    this.getAllBookDetails();
   }
 
 }

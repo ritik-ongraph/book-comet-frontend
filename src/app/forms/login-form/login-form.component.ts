@@ -1,54 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+export interface Iuser{
+  username:string,
+  password:string,
+
+}
 @Component({
   selector: 'app-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
+
 export class FormComponent implements OnInit {
- public formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder,private router: Router,private authService:AuthenticationService) {
-
-   }
-
-  ngOnInit(): void {
-  this.initalilizedForm();
+  public formGroup: FormGroup;
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private snackbar: MatSnackBar) {
   }
-
-  initalilizedForm(){
-   
+  ngOnInit(): void {
+    this.initalilizedForm();
+  }
+  initalilizedForm() {
     this.formGroup = this.formBuilder.group({
       'username': ['', Validators.required],
       'password': ['', Validators.required],
-      
     });
   }
-
-  onSubmit(data:any,isValid:any):void{
-    console.log("data", data);
-    console.log("isvalid",isValid);
-    console.log("form",this.formGroup);
-    if(!isValid){
+  onSubmit(data: NgForm, isValid: boolean): void {
+   if (!isValid) {
       return;
-     
-
     }
-
-    this.authService.loginUser(data).subscribe((result)=>{
-       console.log("result",result);
-       localStorage.setItem('x-access-token','admin');
-       this.router.navigate(['dashboard']);
-       
-    },(error)=>{
-       console.log("error",error);
-    })
+    this.authService.loginUser(data).subscribe((result: any) => {
+      // If login credentials are correct we will set token in local storage.
+      localStorage.setItem('x-access-token', 'admin');
+      this.router.navigate(['dashboard']);
+    }, (error) => {
+      this.snackbar.open(error.error.message, 'ok');
+    });
     this.resetForm();
   }
-
-  resetForm():void{
+  resetForm(): void {
     this.formGroup.reset();
   }
-
 }

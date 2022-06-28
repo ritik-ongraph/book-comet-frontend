@@ -1,14 +1,15 @@
-mat-icon{
+mat-icon {
     cursor: pointer;
     font-size: 40px;
     height: 100%;
     width: 100%;
 }
 
-.form{
+.form {
     width: 80%;
 }
-.form-element{
+
+.form-element {
     display: flex;
 
 }

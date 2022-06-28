@@ -2,29 +2,21 @@
 	<p>
 		{{message}}
 	</p>
-
-
 	<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value,formGroup.valid)" class="form">
 		<mat-form-field class="form-full-width" appearance="fill">
 			<mat-label>Book Quantity</mat-label>
-			<input type ="number" matInput min="0" formControlName="qty" OnlyNumber="true" >
+			<input type="number" matInput min="0" formControlName="qty" OnlyNumber="true">
 			<mat-error *ngIf="!formGroup.controls['qty'].valid && formGroup.controls['qty'].touched">
-			   Book Quantity must be Positive Number
-			  </mat-error>
-		 </mat-form-field>
-		 <div class="form-element">
+				Book Quantity must be Positive Number
+			</mat-error>
+		</mat-form-field>
+		<div class="form-element">
 			<mat-icon (click)="incrementQuantity();">add_circle_outline</mat-icon>
 			<mat-icon (click)="decrementQuantity();">remove_circle_outline</mat-icon>
-
 		</div>
 		<div class="form-element buttons-group">
-			<button type="submit" mat-raised-button color="primary"  tabindex="1">confirm</button>
+			<button type="submit" mat-raised-button color="primary" tabindex="1">confirm</button>
 			<button mat-raised-button mat-dialog-close tabindex="-1">close</button>
-
-
 		</div>
 	</form>
-	
-
-
 </mat-dialog-content>

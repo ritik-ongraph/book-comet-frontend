@@ -40,14 +40,15 @@ import { AuthenticationGuard } from './gaurds/authentication.guard';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     MaterialModule,
     ReactiveFormsModule,
   ],
   providers: [AuthenticationGuard,
-    {provide:HTTP_INTERCEPTORS,
-      useClass:TokenInterceptorService,
-    multi:true}],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

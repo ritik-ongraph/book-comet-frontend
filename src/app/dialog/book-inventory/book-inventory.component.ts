@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { BookInventoryService } from 'src/app/services/book-inventory.service';
 import { BookService } from 'src/app/services/book.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-book-inventory',
@@ -14,7 +15,11 @@ export class BookInventoryComponent implements OnInit {
   public formGroup: FormGroup;
   private bookId:string
 
-  constructor(private formBuilder: FormBuilder,private bookInventoryService :BookInventoryService ,private bookService:BookService,@Inject(MAT_DIALOG_DATA) private data: any,
+  constructor(private formBuilder: FormBuilder,
+  private snackBar:MatSnackBar,
+  private bookInventoryService :BookInventoryService ,
+  private bookService:BookService,
+  @Inject(MAT_DIALOG_DATA) private data: any,
   private dialogRef: MatDialogRef<BookInventoryComponent>) { }
   public bookqty:number;
   ngOnInit(): void {
@@ -54,30 +59,23 @@ export class BookInventoryComponent implements OnInit {
   }
 
   onSubmit(data:any,isValid:any):void{
-    console.log("data", data);
-    console.log("isvalid",isValid);
-    console.log("form",this.formGroup);
     this.bookqty = data.qty;
     if(!isValid){
       return;
-     
-
     }
     this.bookInventoryService.updateBookQuantityByBookId(this.bookId,this.bookqty).subscribe((result)=>{
-    console.log("result",result);
-    this.onConfirmClick();
+      this.onConfirmClick();
     },(error)=>{
-      console.log("error", error);
-    })
+      this.snackBar.open('some error occor Please try again ',"ok");
+      })
   }
 
   onConfirmClick(): void {
     this.bookService.getBookDetails().subscribe((response:any)=>{
-      console.log('result',response.data);
       let  data = response.data;
       this.bookService.setBookDetails(data);
     },(error)=>{
-      console.log("error",error);
+      this.snackBar.open('some error occor Please try again ',"ok");
     })
    
     this.dialogRef.close(true);

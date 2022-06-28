@@ -1,11 +1,7 @@
-.mat-dialog-container{
-    position: absolute;
-    }
-
-.mat-dialog-actions .btn{
+.mat-dialog-actions {
     position: relative;
-    left:10px;
-    top:50%
-
 }
-
+.btn {
+    position: absolute;
+    top: 25%,
+}

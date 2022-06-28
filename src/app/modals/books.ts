@@ -11,11 +11,5 @@ export interface IBooks {
 
 }
 
-enum BookFormats {
-    'Ebook',
-    'HardCover',
-    'Epub'
-
-}
 
 

@@ -7,3 +7,13 @@ mat-card.add-books{
     margin: 25px auto;
     width:80%;
 }
+
+.form-element.d-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.text-center{
+    text-align: center;
+}
